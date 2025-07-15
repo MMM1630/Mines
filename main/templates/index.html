@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ general.title }}</title>
+  <style>
+    body {
+      background: #121212;
+      color: #ddd;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1,
+    h2 {
+      color: #00ffc3;
+      text-align: center;
+      user-select: none;
+    }
+
+    h3 {
+      color: #00a884;
+      margin-bottom: 5px;
+      user-select: text;
+    }
+
+    p {
+      line-height: 1.4;
+      user-select: text;
+    }
+
+    a.button {
+      display: inline-block;
+      background: #00ffc3;
+      color: #000;
+      padding: 12px 30px;
+      border-radius: 15px;
+      font-weight: bold;
+      text-decoration: none;
+      margin: 20px auto;
+      text-align: center;
+      user-select: none;
+    }
+
+    a.button:hover {
+      background: #00b28c;
+    }
+
+    .card {
+      background: #1f1f1f;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px #00ffc333;
+      overflow: hidden;
+    }
+
+    .card img.icon {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      float: left;
+      margin-right: 15px;
+      border-radius: 10px;
+      user-select: none;
+    }
+
+    .clear {
+      clear: both;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #666;
+      user-select: none;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  {% if general.img %}
+  <h1>Наш промокод для хорошо начало</h1>
+  <img src="{{ general.img.url }}" alt="Промо изображение"
+    style="width: 50%; border-radius: 15px; margin-bottom: 30px;" />
+  {% endif %}
+
+  <h1>{{ general.title }}</h1>
+  <p>{{ general.description }}</p>
+  <p>{{ general.information }}</p>
+
+  <a href="{{ general.url }}" target="_blank" rel="noopener" class="button">Играть в боте</a>
+
+  <h2>ИГРА MINES ЭТО</h2>
+  {% for game in games %}
+  <div class="card">
+    {% if game.img %}
+    <img src="{{ game.img.url }}" alt="Иконка игры" class="icon" />
+    {% endif %}
+    <h3>{{ game.title }}</h3>
+    <p>{{ game.description }}</p>
+    <div class="clear"></div>
+  </div>
+  {% empty %}
+  <p>Информация о играх пока отсутствует.</p>
+  {% endfor %}
+
+  <h2>КАК НАЧАТЬ ИГРАТЬ</h2>
+  {% for step in start %}
+  <div class="card">
+    <h3>{{ step.number }}. {{ step.title }}</h3>
+    <p>{{ step.description }}</p>
+  </div>
+  {% empty %}
+  <p>Информация о старте игры отсутствует.</p>
+  {% endfor %}
+
+  <h2>СКАЧАТЬ MINES</h2>
+  {% for d in downloads %}
+  <div class="card">
+    {% if d.img %}
+    <img src="{{ d.img.url }}" alt="Скриншот/иконка" class="icon" />
+    {% endif %}
+    <h3>{{ d.title }}</h3>
+    <p>{{ d.description }}</p>
+    <a href="{{ d.url }}" target="_blank" rel="noopener" class="button">Скачать</a>
+    <div class="clear"></div>
+  </div>
+  {% empty %}
+  <p>Информация о загрузках отсутствует.</p>
+  {% endfor %}
+
+  <h2>СТРАТЕГИИ ВЫИГРЫША</h2>
+  {% for s in strategies %}
+  <div class="card">
+    <h3>{{ s.title }}</h3>
+    <h4>Для новичков</h4>
+    <p>{{ s.junior }}</p>
+    <h4>Для среднего уровня</h4>
+    <p>{{ s.middle }}</p>
+    <h4>Для профи</h4>
+    <p>{{ s.pro }}</p>
+  </div>
+  {% empty %}
+  <p>Стратегии пока не добавлены.</p>
+  {% endfor %}
+
+  <h2>ОТЗЫВЫ</h2>
+  {% for r in reviews %}
+  <div class="card">
+    <h3>{{ r.name }}</h3>
+    <p>"{{ r.text }}"</p>
+  </div>
+  {% empty %}
+  <p>Отзывов пока нет.</p>
+  {% endfor %}
+
+  <footer>
+    &copy; 2025 Mines. Все права защищены.
+  </footer>
+
+</body>
+
+</html>
